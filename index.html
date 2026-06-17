@@ -3,101 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entretenimiento Digital | Menú y Precios</title>
+    <title>Entretenimiento Digital | Bienvenidos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN -->
     <header>
         <div class="logo">Entretenimiento <span>Digital</span></div>
         <nav>
-            <a href="index.html">Inicio</a>
+            <a href="index.html" class="active">Inicio</a>
             <a href="juegos.html">Juegos y Premios</a>
-            <a href="menu.html" class="active">Menú y Precios</a>
+            <a href="menu.html">Menú y Precios</a>
         </nav>
     </header>
 
-    <!-- SECCIÓN MENÚ POR PARES (PRODUCTO Y PRECIO) -->
-    <section id="menu" class="menu-section" style="padding-top: 120px;">
-        <h2>Nuestro <span>Menú Gamer</span></h2>
-        <p class="sub">Combustible de calidad para disfrutar mientras juegas y activas tus giros.</p>
-        
-        <div class="menu-container">
-            <!-- Palomitas -->
-            <div class="menu-item">
-                <div class="menu-info">
-                    <h3>Palomitas con mantequilla 🍿</h3>
-                    <p>Nuestro producto estrella. Calentitas, crujientes y con mucha mantequilla.</p>
-                </div>
-                <div class="menu-precio">$2.00</div>
-            </div>
-            
-            <!-- Chocolate -->
-            <div class="menu-item">
-                <div class="menu-info">
-                    <h3>Barras de chocolate 🍫</h3>
-                    <p>El toque dulce perfecto para recargar energías en tus partidas.</p>
-                </div>
-                <div class="menu-precio">$1.75</div>
-            </div>
-            
-            <!-- Jugos -->
-            <div class="menu-item">
-                <div class="menu-info">
-                    <h3>Jugos Del Valle 🧃</h3>
-                    <p>Refrescantes sabores frutales listos para acompañar tus snacks.</p>
-                </div>
-                <div class="menu-precio">$0.75</div>
-            </div>
-
-            <!-- Churros -->
-            <div class="menu-item">
-                <div class="menu-info">
-                    <h3>Churros con repollo 🥖</h3>
-                    <p>Un antojo tradicional preparado al momento con repollo fresco y salsas.</p>
-                </div>
-                <div class="menu-precio">$0.50</div>
-            </div>
-            
-            <!-- Limonada -->
-            <div class="menu-item">
-                <div class="menu-info">
-                    <h3>Limonada bien fría 🍋</h3>
-                    <p>Totalmente natural, refrescante y perfecta para quitar la sed.</p>
-                </div>
-                <div class="menu-precio">$0.50</div>
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Bienvenidos a <br><span>Entretenimiento Digital</span></h1>
+            <p>El lugar perfecto donde el gaming, el mejor sabor y la diversión de feria se encuentran. ¡Navega por nuestras secciones dedicadas para descubrir todo lo que tenemos preparado para ti!</p>
+            <div class="hero-buttons" style="margin-top: 30px;">
+                <a href="juegos.html" class="btn" style="margin-right: 15px; box-shadow: 0 0 15px #45f3ff;">🎮 Ver Juegos y Premios</a>
+                <a href="menu.html" class="btn" style="background: #ff007f; border-color: #ff007f; box-shadow: 0 0 15px #ff007f;">🍿 Ver Menú Gamer</a>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN DE PROMOCIONES DE LA RULETA -->
-    <section id="promos" class="promos-section" style="background: #0b0c10; padding: 60px 20px; text-align: center; border-top: 2px solid #ff007f;">
-        <h2>¡Nuestras <span>Promociones</span>!</h2>
-        <p class="sub" style="color: #45f3ff;">Compra tu combo, haz girar la ruleta en el local y gana premios.</p>
+    <section id="contacto" class="contacto-section" style="border-top: 2px solid #45f3ff;">
+        <h2>¿Listo para la <span>Diversión</span>?</h2>
+        <p class="sub">Conoce nuestros horarios especiales y síguenos en plataformas oficiales.</p>
         
-        <div class="juegos-container">
-            <!-- Promo 1 -->
-            <div class="juego-card" style="border: 2px solid #ff007f;">
-                <i class="fas fa-star" style="color: #ff007f; font-size: 2.5rem; margin-bottom: 15px;"></i>
-                <h3>Combo Estrella ⭐</h3>
-                <p>Por la compra de nuestras <strong>Palomitas con Mantequilla ($2.00)</strong>, ¡te regalamos <strong>2 giros gratis en la Ruleta Giratoria</strong>!</p>
-                <span style="font-size: 0.85rem; color: #aaa; display: block; margin-top: 10px;">*(Válido para una compra por cliente)*</span>
+        <div class="contacto-container">
+            <div class="contacto-box">
+                <i class="fas fa-clock" style="color: #45f3ff;"></i>
+                <h3>Horarios de Atención</h3>
+                <p><strong>Lunes a Viernes:</strong><br>8:00 AM - 10:00 PM</p>
+                <p style="margin-top: 8px;"><strong>Sábados:</strong><br>8:00 AM - 1:00 PM</p>
+                <div style="background: rgba(69, 243, 255, 0.1); padding: 10px; border-radius: 8px; margin-top: 15px; border: 1px dashed #45f3ff;">
+                    <p style="color: #45f3ff; font-weight: bold; margin: 0;">🎯 ¡DOMINGO GAMER! 🎮</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.95rem;">Solo Videojuegos: 1:00 PM - 10:00 PM</p>
+                </div>
             </div>
-            
-            <!-- Promo 2 -->
-            <div class="juego-card" style="border: 2px solid #45f3ff;">
-                <i class="fas fa-candy-cane" style="color: #45f3ff; font-size: 2.5rem; margin-bottom: 15px;"></i>
-                <h3>Doble Chocolate 🍫</h3>
-                <p>Por la compra de <strong>2 Barras de Chocolate ($3.50)</strong>, te llevas un pase especial de <strong>3 giros en la Ruleta Giratoria</strong>.</p>
-                <span style="font-size: 0.85rem; color: #aaa; display: block; margin-top: 10px;">*¡Más dulces, más oportunidades de ganar!*</span>
+
+            <div class="contacto-box">
+                <i class="fas fa-share-alt" style="color: #ff007f;"></i>
+                <h3>Nuestras Redes</h3>
+                <p class="sub-box">Haz clic para ver nuestro contenido oficial:</p>
+                <div class="redes-links" style="margin-top: 15px;">
+                    <a href="https://www.facebook.com/share/18bnicf1Em/" target="_blank" style="background: #1877f2; color: white; padding: 12px; border-radius: 5px; display: block; margin-bottom: 10px; text-decoration: none; font-weight: bold; text-align: center;">
+                        <i class="fab fa-facebook"></i> Facebook Oficial
+                    </a>
+                    <a href="https://www.tiktok.com/@entretenimiento.d64" target="_blank" style="background: #000000; color: white; padding: 12px; border-radius: 5px; display: block; text-decoration: none; font-weight: bold; text-align: center; border: 1px solid #ff007f;">
+                        <i class="fab fa-tiktok" style="color: #ff007f;"></i> TikTok Oficial
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/50378856202?text=Hola!%20Quiero%20ordenar%20comida%20y%20jugar" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/50378856202?text=Hola!%20Vengo%20de%20la%20página%20web%20y%20quiero%20más%20información" class="whatsapp-btn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
