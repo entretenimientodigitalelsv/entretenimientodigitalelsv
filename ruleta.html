@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entretenimiento Digital | Ruleta de la Suerte</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .game-section {
+            padding-top: 120px;
+            text-align: center;
+            min-height: 100vh;
+            background: #0b0c10;
+        }
+        .roulette-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 40px auto;
+        }
+        .roulette-arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #ff007f;
+            z-index: 10;
+            filter: drop-shadow(0 0 8px #ff007f);
+        }
+        canvas {
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(69, 243, 255, 0.5), inset 0 0 20px rgba(255, 0, 127, 0.3);
+            border: 4px solid #45f3ff;
+            background: #12141c;
+            transform: rotate(0deg);
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+        }
+        .spin-btn {
+            background: #ff007f;
+            color: #fff;
+            border: 2px solid #ff007f;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff007f;
+            transition: 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+        .spin-btn:hover {
+            background: #45f3ff;
+            border-color: #45f3ff;
+            box-shadow: 0 0 25px #45f3ff;
+            color: #0b0c10;
+        }
+        .spin-btn:disabled {
+            background: #444;
+            border-color: #444;
+            box-shadow: none;
+            color: #888;
+            cursor: not-allowed;
+        }
+        #result-box {
+            margin-top: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            min-height: 40px;
+            text-shadow: 0 0 10px #45f3ff;
+        }
+        .instrucciones {
+            max-width: 500px;
+            margin: 30px auto;
+            background: #12141c;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed #ff007f;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Entretenimiento <span>Digital</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="juegos.html">Juegos y Premios</a>
+            <a href="menu.html">Menú y Precios</a>
+            <a href="ruleta.html" class="active">¡Ruleta Digital!</a>
+        </nav>
+    </header>
+
+    <section class="game-section">
+        <h2>La Ruleta <span>Digital</span></h2>
+        <p class="sub">¡Prueba tu suerte gratis desde la web antes de visitarnos!</p>
+
+        <div class="roulette-wrapper">
+            <div class="roulette-arrow"></div>
+            <canvas id="wheel" width="320" height="320"></canvas>
+        </div>
+
+        <button id="spin-button" class="spin-btn" onclick="spinWheel()">¡GIRAR RULETA! 🎮</button>
+        <div id="result-box"></div>
+
+        <div class="instrucciones">
+            <h3 style="color: #45f3ff; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> ¿Cómo reclamar?</h3>
+            <p style="font-size: 0.95rem; line-height: 1.4;">Si ganas un premio físico, tómale una <strong>captura de pantalla</strong> a tu resultado y muéstrala en nuestro local al hacer tu consumo mínimo. ¡Válido por un intento al día!</p>
+        </div>
+    </section>
+
+    <a href="https://wa.me/50378856202?text=Hola!%20Acabo%20de%20jugar%20en%20la%20ruleta%20digital" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        const canvas = document.getElementById("wheel");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spin-button");
+        const resultBox = document.getElementById("result-box");
+
+        const prizes = [
+            "🍿 ¡Palomitas Gratis!",
+            "🎯 Sigue Participando",
+            "🥤 Limonada Fría",
+            "🎮 15 Min. Zona Gamer",
+            "🥖 Combo Churros 2x1",
+            "🍫 Chocolate Regalo"
+        ];
+
+        const colors = ["#ff007f", "#12141c", "#45f3ff", "#12141c", "#ff007f", "#12141c"];
+        const textColors = ["#ffffff", "#45f3ff", "#0b0c10", "#ff007f", "#ffffff", "#45f3ff"];
+        
+        const numSegments = prizes.length;
+        const segmentAngle = (2 * Math.PI) / numSegments;
+
+        function drawWheel() {
+            for (let i = 0; i < numSegments; i++) {
+                const startAngle = i * segmentAngle;
+                const endAngle = startAngle + segmentAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(160, 160);
+                ctx.arc(160, 160, 155, startAngle, endAngle);
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#45f3ff";
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(160, 160);
+                ctx.rotate(startAngle + segmentAngle / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = textColors[i];
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText(prizes[i], 140, 5);
+                ctx.restore();
+            }
+        }
+
+        drawWheel();
+
+        function spinWheel() {
+            spinBtn.disabled = true;
+            resultBox.innerText = "⏳ Girando la suerte...";
+            
+            const spins = Math.floor(Math.random() * 5) + 5;
+            const randomDegrees = Math.floor(Math.random() * 360);
+            const totalDegrees = (spins * 360) + randomDegrees;
+            
+            canvas.style.transform = `rotate(${totalDegrees}deg)`;
+
+            setTimeout(() => {
+                const normalizedDegrees = (360 - (randomDegrees % 360) + 270) % 360;
+                const prizeIndex = Math.floor(normalizedDegrees / (360 / numSegments)) % numSegments;
+                const wonPrize = prizes[prizeIndex];
+                
+                if(wonPrize.includes("Sigue Participando")) {
+                    resultBox.style.color = "#ff007f";
+                    resultBox.innerHTML = `❌ ${wonPrize} ¡Suerte la próxima!`;
+                } else {
+                    resultBox.style.color = "#45f3ff";
+                    resultBox.innerHTML = `🎉 ¡GANASTE: ${wonPrize}! 🏆`;
+                }
+                
+                spinBtn.disabled = false;
+                canvas.style.transition = "none";
+                canvas.style.transform = `rotate(${randomDegrees}deg)`;
+                setTimeout(() => {
+                    canvas.style.transition = "transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)";
+                }, 50);
+
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
