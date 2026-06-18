@@ -121,13 +121,14 @@
     </a>
 
     <script>
+        <!-- SCRIPT DEL JUEGO CON BLOQUEO ANTI-TRAMPAS -->
+    <script>
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
         const spinBtn = document.getElementById("spin-button");
         const resultBox = document.getElementById("result-box");
 
-    
-       const prizes = [
+        const prizes = [
             "🎮 ¡10 Minutos Gratis!",
             "🎯 Sigue Participando",
             "🎮 ¡15 Minutos Gratis!",
@@ -169,6 +170,24 @@
 
         drawWheel();
 
+        // COMPROBACIÓN ANTI-TRAMPAS: Ver si ya jugó hoy
+        window.onload = function() {
+            const yaJugo = localStorage.getItem("ruleta_jugada_hoy");
+            const fechaGuardada = localStorage.getItem("ruleta_fecha_jugada");
+            const hoy = new Date().toDateString();
+
+            // Si ya jugó el día de hoy, bloqueamos el botón de entrada
+            if (yaJugo === "true" && fechaGuardada === hoy) {
+                spinBtn.disabled = true;
+                spinBtn.style.background = "#444";
+                spinBtn.style.borderColor = "#444";
+                spinBtn.style.color = "#888";
+                spinBtn.innerText = "🔒 INTENTO AGOTADO";
+                resultBox.style.color = "#ff007f";
+                resultBox.innerHTML = "🚫 Ya utilizaste tu intento de hoy. ¡Regresa mañana para probar tu suerte!";
+            }
+        };
+
         function spinWheel() {
             spinBtn.disabled = true;
             resultBox.innerText = "⏳ Girando la suerte...";
@@ -192,7 +211,19 @@
                     resultBox.innerHTML = `🎉 ¡GANASTE: ${wonPrize}! 🏆`;
                 }
                 
-                spinBtn.disabled = false;
+                // GUARDAR EN LA MEMORIA DEL CELULAR QUE YA JUGÓ HOY
+                const hoy = new Date().toDateString();
+                localStorage.setItem("ruleta_jugada_hoy", "true");
+                localStorage.setItem("ruleta_fecha_jugada", hoy);
+
+                // Bloquear el botón permanentemente para que no vuelva a presionar
+                setTimeout(() => {
+                    spinBtn.style.background = "#444";
+                    spinBtn.style.borderColor = "#444";
+                    spinBtn.style.color = "#888";
+                    spinBtn.innerText = "🔒 INTENTO AGOTADO";
+                }, 1000);
+
                 canvas.style.transition = "none";
                 canvas.style.transform = `rotate(${randomDegrees}deg)`;
                 setTimeout(() => {
