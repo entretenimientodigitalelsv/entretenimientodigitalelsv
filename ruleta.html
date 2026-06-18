@@ -6,6 +6,8 @@
     <title>Entretenimiento Digital | Ruleta de la Suerte</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Librería de Confeti Efecto Premium -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         /* FONDO GAMER ANIMADO DE CIRCUITOS */
         .game-section {
@@ -19,9 +21,9 @@
                 linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.85)),
                 radial-gradient(circle at 20% 30%, rgba(69, 243, 255, 0.08) 0%, transparent 40%),
                 radial-gradient(circle at 80% 70%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
+            transition: background 0.3s ease;
         }
 
-        /* Líneas de circuitos simuladas con CSS */
         .game-section::before {
             content: '';
             position: absolute;
@@ -34,6 +36,16 @@
             z-index: 0;
         }
 
+        /* 🚨 ANIMACIÓN DE LUCES PARPADEANTES GAMER (Se activa al girar) */
+        .game-section.spinning-lights {
+            animation: neonBlink 0.5s infinite alternate;
+        }
+
+        @keyframes neonBlink {
+            0% { background-color: rgba(69, 243, 255, 0.2); }
+            100% { background-color: rgba(255, 0, 127, 0.2); }
+        }
+
         .game-content-container {
             position: relative;
             z-index: 1;
@@ -42,7 +54,7 @@
             padding: 0 20px;
         }
 
-        /* CONTENEDOR DE LA RULETA (Para desaparecerlo con estilo) */
+        /* CONTENEDOR DE LA RULETA */
         .roulette-area {
             transition: opacity 0.8s ease, transform 0.8s ease;
             opacity: 1;
@@ -53,7 +65,7 @@
             opacity: 0;
             transform: scale(0.8);
             pointer-events: none;
-            display: none; /* Se quita del flujo para que suba el mensaje */
+            display: none;
         }
 
         .roulette-wrapper {
@@ -109,7 +121,7 @@
             color: #0b0c10;
         }
 
-        /* PANTALLA DE GRACIAS POR PARTICIPAR (Oculta al inicio) */
+        /* PANTALLA DE GRACIAS POR PARTICIPAR */
         .thanks-screen {
             display: none;
             opacity: 0;
@@ -118,9 +130,9 @@
             margin: 60px auto;
             padding: 40px;
             border-radius: 15px;
-            background: rgba(18, 20, 28, 0.6);
+            background: rgba(18, 20, 28, 0.8);
             border: 2px solid #45f3ff;
-            box-shadow: 0 0 30px rgba(69, 243, 255, 0.2);
+            box-shadow: 0 0 30px rgba(69, 243, 255, 0.4);
             max-width: 550px;
         }
 
@@ -165,6 +177,84 @@
             border: 1px dashed #ff007f;
         }
 
+        /* MENÚ DOBLE DE WHATSAPP */
+        .whatsapp-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .whatsapp-main-btn {
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .whatsapp-main-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 25px #25d366;
+        }
+
+        .whatsapp-menu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: rgba(18, 20, 28, 0.95);
+            border: 2px solid #45f3ff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(69, 243, 255, 0.3);
+        }
+
+        .whatsapp-menu.show {
+            display: flex;
+        }
+
+        .whatsapp-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: #12141c;
+            border: 1px solid #333;
+            transition: 0.2s ease;
+        }
+
+        .whatsapp-link i {
+            color: #25d366;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-link.empresa:hover {
+            border-color: #45f3ff;
+            background: rgba(69, 243, 255, 0.1);
+        }
+
+        .whatsapp-link.presidencia:hover {
+            border-color: #ff007f;
+            background: rgba(255, 0, 127, 0.1);
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
@@ -185,7 +275,7 @@
     </header>
 
     <!-- ZONA DEL JUEGO -->
-    <section class="game-section">
+    <section id="game-section" class="game-section">
         <div class="game-content-container">
             
             <!-- ÁREA ACTIVA DE LA RULETA -->
@@ -201,7 +291,7 @@
                 <button id="spin-button" class="spin-btn" onclick="spinWheel()">¡GIRAR RULETA! 🎮</button>
             </div>
 
-            <!-- RESULTADO DEL PREMIO (Se queda visible temporalmente o muestra el bloqueo) -->
+            <!-- RESULTADO DEL PREMIO -->
             <div id="result-box"></div>
 
             <!-- PANTALLA FINAL: GRACIAS POR PARTICIPAR -->
@@ -218,12 +308,22 @@
         </div>
     </section>
 
-    <!-- WHATSAPP -->
-    <a href="https://wa.me/50378856202?text=Hola!%20Acabo%20de%20jugar%20en%20la%20ruleta%20digital" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- MENÚ FLOTANTE DE WHATSAPP -->
+    <div class="whatsapp-container">
+        <div id="wa-menu" class="whatsapp-menu">
+            <a href="https://wa.me/50364618068?text=Hola!%20Acabo%20de%20ver%20la%20página%20web%20y%20quiero%20hacer%20una%20consulta%20sobre%20la%20Zona%20Gamer%20o%20el%20Menú." class="whatsapp-link empresa" target="_blank">
+                <i class="fab fa-whatsapp"></i> 📱 WhatsApp Empresa
+            </a>
+            <a href="https://wa.me/50378856202?text=Hola,%20quiero%20contactarme%20directamente%20con%20la%20administración%20de%20la%20empresa." class="whatsapp-link presidencia" target="_blank">
+                <i class="fab fa-whatsapp"></i> 👑 Contacto Presidencia
+            </a>
+        </div>
+        <button class="whatsapp-main-btn" onclick="toggleWAMenu()">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+    </div>
 
-    <!-- LÓGICA DEL JUEGO CON CAMBIO DE PANTALLA -->
+    <!-- LÓGICA CON LUCES Y CONFETI -->
     <script>
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
@@ -231,6 +331,7 @@
         const resultBox = document.getElementById("result-box");
         const rouletteArea = document.getElementById("roulette-area");
         const thanksScreen = document.getElementById("thanks-screen");
+        const gameSection = document.getElementById("game-section");
 
         const prizes = [
             "🎮 ¡10 Minutos Gratis!",
@@ -274,14 +375,16 @@
 
         drawWheel();
 
-        // CONTROL ANTI-TRAMPAS AL CARGAR LA PÁGINA
+        function toggleWAMenu() {
+            document.getElementById("wa-menu").classList.toggle("show");
+        }
+
         window.onload = function() {
             const yaJugo = localStorage.getItem("ruleta_jugada_hoy");
             const fechaGuardada = localStorage.getItem("ruleta_fecha_jugada");
             const hoy = new Date().toDateString();
 
             if (yaJugo === "true" && fechaGuardada === hoy) {
-                // Si ya jugó hoy, ocultamos la ruleta de un solo y mostramos la pantalla final
                 rouletteArea.classList.add("hidden");
                 thanksScreen.classList.add("show");
                 resultBox.style.color = "#ff007f";
@@ -293,6 +396,9 @@
             spinBtn.disabled = true;
             resultBox.innerText = "⏳ Girando la suerte...";
             
+            // Activar luces parpadeantes neón
+            gameSection.classList.add("spinning-lights");
+            
             const spins = Math.floor(Math.random() * 5) + 5;
             const randomDegrees = Math.floor(Math.random() * 360);
             const totalDegrees = (spins * 360) + randomDegrees;
@@ -300,6 +406,9 @@
             canvas.style.transform = `rotate(${totalDegrees}deg)`;
 
             setTimeout(() => {
+                // Apagar las luces de fondo al detenerse
+                gameSection.classList.remove("spinning-lights");
+
                 const normalizedDegrees = (360 - (randomDegrees % 360) + 270) % 360;
                 const prizeIndex = Math.floor(normalizedDegrees / (360 / numSegments)) % numSegments;
                 const wonPrize = prizes[prizeIndex];
@@ -310,18 +419,25 @@
                 } else {
                     resultBox.style.color = "#45f3ff";
                     resultBox.innerHTML = `🎉 ¡GANASTE: ${wonPrize}! 🏆`;
+                    
+                    // 🎉 DISPARO DE CONFETI GAMER (Cian y Magenta)
+                    confetti({
+                        particleCount: 150,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#45f3ff', '#ff007f', '#ffffff']
+                    });
                 }
                 
-                // GUARDAR INTENTO EN EL NAVEDADOR
                 const hoy = new Date().toDateString();
                 localStorage.setItem("ruleta_jugada_hoy", "true");
                 localStorage.setItem("ruleta_fecha_jugada", hoy);
 
-                // ESPERAR 3 SEGUNDOS PARA QUE VEAN EL PREMIO Y LUEGO DESVANECER LA RULETA
+                // Esperar 4 segundos disfrutando el premio y luego desvanecer
                 setTimeout(() => {
                     rouletteArea.classList.add("hidden");
                     thanksScreen.classList.add("show");
-                }, 3500);
+                }, 4000);
 
             }, 4000);
         }
