@@ -9,41 +9,35 @@
     <!-- Librería de Confeti Efecto Premium -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        /* FONDO GAMER ANIMADO DE CIRCUITOS */
+        /* 🎮 FONDO CON IMAGEN GAMER REAL DE ALTA CALIDAD */
         .game-section {
             padding-top: 120px;
             text-align: center;
             min-height: 100vh;
-            background: #0b0c10;
             position: relative;
             overflow: hidden;
-            background-image: 
-                linear-gradient(rgba(11, 12, 16, 0.85), rgba(11, 12, 16, 0.85)),
-                radial-gradient(circle at 20% 30%, rgba(69, 243, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 127, 0.08) 0%, transparent 40%);
-            transition: background 0.3s ease;
+            /* Imagen gamer profesional de fondo */
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920') no-repeat center center fixed;
+            background-size: cover;
         }
 
+        /* Capa oscura encima de la imagen para que las letras y la ruleta resalten perfectamente */
         .game-section::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15;
-            background-image: 
-                linear-gradient(90deg, #45f3ff 1px, transparent 1px),
-                linear-gradient(#ff007f 1px, transparent 1px);
-            background-size: 40px 40px;
+            background: rgba(11, 12, 16, 0.82);
             z-index: 0;
         }
 
-        /* 🚨 ANIMACIÓN DE LUCES PARPADEANTES GAMER (Se activa al girar) */
-        .game-section.spinning-lights {
-            animation: neonBlink 0.5s infinite alternate;
+        /* 🚨 EFECTO DE LUCES PARPADEANTES AL GIRAR (Afecta la capa oscura) */
+        .game-section.spinning-lights::before {
+            animation: neonFlash 0.4s infinite alternate;
         }
 
-        @keyframes neonBlink {
-            0% { background-color: rgba(69, 243, 255, 0.2); }
-            100% { background-color: rgba(255, 0, 127, 0.2); }
+        @keyframes neonFlash {
+            0% { background: rgba(69, 243, 255, 0.4); }
+            100% { background: rgba(255, 0, 127, 0.4); }
         }
 
         .game-content-container {
@@ -54,9 +48,19 @@
             padding: 0 20px;
         }
 
+        /* TABLERO GAMER SEMI-TRANSPARENTE (Contenedor principal) */
+        .main-card-setup {
+            background: rgba(18, 20, 28, 0.85);
+            border: 2px solid #45f3ff;
+            box-shadow: 0 0 30px rgba(69, 243, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
         /* CONTENEDOR DE LA RULETA */
         .roulette-area {
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease, transform 0.6s ease;
             opacity: 1;
             transform: scale(1);
         }
@@ -72,7 +76,7 @@
             position: relative;
             width: 320px;
             height: 320px;
-            margin: 40px auto;
+            margin: 30px auto;
         }
 
         .roulette-arrow {
@@ -91,7 +95,7 @@
 
         canvas {
             border-radius: 50%;
-            box-shadow: 0 0 25px rgba(69, 243, 255, 0.5), inset 0 0 20px rgba(255, 0, 127, 0.3);
+            box-shadow: 0 0 25px rgba(69, 243, 255, 0.5);
             border: 4px solid #45f3ff;
             background: #12141c;
             transform: rotate(0deg);
@@ -110,8 +114,7 @@
             box-shadow: 0 0 15px #ff007f;
             transition: 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .spin-btn:hover {
@@ -121,19 +124,13 @@
             color: #0b0c10;
         }
 
-        /* PANTALLA DE GRACIAS POR PARTICIPAR */
+        /* PANTALLA FINAL: GRACIAS POR PARTICIPAR */
         .thanks-screen {
             display: none;
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 1s ease, transform 1s ease;
-            margin: 60px auto;
-            padding: 40px;
-            border-radius: 15px;
-            background: rgba(18, 20, 28, 0.8);
-            border: 2px solid #45f3ff;
-            box-shadow: 0 0 30px rgba(69, 243, 255, 0.4);
-            max-width: 550px;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            padding: 30px 10px;
         }
 
         .thanks-screen.show {
@@ -143,121 +140,95 @@
         }
 
         .thanks-title {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 900;
             line-height: 1.2;
             color: #45f3ff;
             text-shadow: 0 0 15px #45f3ff, 0 0 30px #ff007f;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 2px;
         }
 
         .thanks-emoji {
-            font-size: 5rem;
-            margin-top: 15px;
+            font-size: 5.5rem;
+            margin-top: 20px;
             filter: drop-shadow(0 0 15px #ff007f);
-            animation: pulse 2s infinite alternate;
+            animation: pulse 1.5s infinite alternate;
         }
 
         #result-box {
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 1.6rem;
             font-weight: bold;
             color: #fff;
-            min-height: 40px;
+            min-height: 45px;
             text-shadow: 0 0 10px #45f3ff;
         }
 
         .instrucciones {
-            max-width: 500px;
-            margin: 30px auto;
             background: #12141c;
             padding: 20px;
             border-radius: 8px;
             border: 1px dashed #ff007f;
+            margin-top: 20px;
         }
 
-        /* MENÚ DOBLE DE WHATSAPP */
-        .whatsapp-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+        /* 📱 SECCIÓN DE BOTONES DE WHATSAPP DIRECTOS (SIN MENÚS ESCONDIDOS) */
+        .whatsapp-direct-section {
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            gap: 15px;
+            align-items: center;
         }
 
-        .whatsapp-main-btn {
-            background-color: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        .wa-btn-direct {
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-            font-size: 30px;
-            box-shadow: 0px 4px 15px rgba(37, 211, 102, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .whatsapp-main-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 4px 25px #25d366;
-        }
-
-        .whatsapp-menu {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 15px;
-            background: rgba(18, 20, 28, 0.95);
-            border: 2px solid #45f3ff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(69, 243, 255, 0.3);
-        }
-
-        .whatsapp-menu.show {
-            display: flex;
-        }
-
-        .whatsapp-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 12px;
+            width: 100%;
+            max-width: 340px;
+            padding: 14px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
             color: #fff;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            padding: 10px 15px;
-            border-radius: 8px;
-            background: #12141c;
-            border: 1px solid #333;
-            transition: 0.2s ease;
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .whatsapp-link i {
-            color: #25d366;
-            font-size: 1.2rem;
+        .wa-btn-direct i {
+            font-size: 1.4rem;
         }
 
-        .whatsapp-link.empresa:hover {
-            border-color: #45f3ff;
-            background: rgba(69, 243, 255, 0.1);
+        /* Botón de la Empresa (Verde Tech) */
+        .wa-btn-direct.empresa-btn {
+            background: #25d366;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            border: 1px solid #25d366;
         }
 
-        .whatsapp-link.presidencia:hover {
-            border-color: #ff007f;
-            background: rgba(255, 0, 127, 0.1);
+        .wa-btn-direct.empresa-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px #25d366;
+        }
+
+        /* Botón del Presidente (Magenta Presidencia) */
+        .wa-btn-direct.presidencia-btn {
+            background: #ff007f;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+            border: 1px solid #ff007f;
+        }
+
+        .wa-btn-direct.presidencia-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px #ff007f;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
+            100% { transform: scale(1.08); }
         }
     </style>
 </head>
@@ -278,52 +249,53 @@
     <section id="game-section" class="game-section">
         <div class="game-content-container">
             
-            <!-- ÁREA ACTIVA DE LA RULETA -->
-            <div id="roulette-area" class="roulette-area">
-                <h2>La Ruleta <span>Digital</span></h2>
-                <p class="sub">¡Prueba tu suerte gratis desde la web antes de visitarnos!</p>
+            <!-- TARJETA PRINCIPAL REFORZADA -->
+            <div class="main-card-setup">
+                
+                <!-- ÁREA ACTIVA DE LA RULETA -->
+                <div id="roulette-area" class="roulette-area">
+                    <h2>La Ruleta <span>Digital</span></h2>
+                    <p class="sub">¡Prueba tu suerte gratis desde la web antes de visitarnos!</p>
 
-                <div class="roulette-wrapper">
-                    <div class="roulette-arrow"></div>
-                    <canvas id="wheel" width="320" height="320"></canvas>
+                    <div class="roulette-wrapper">
+                        <div class="roulette-arrow"></div>
+                        <canvas id="wheel" width="320" height="320"></canvas>
+                    </div>
+
+                    <button id="spin-button" class="spin-btn" onclick="spinWheel()">¡GIRAR RULETA! 🎮</button>
                 </div>
 
-                <button id="spin-button" class="spin-btn" onclick="spinWheel()">¡GIRAR RULETA! 🎮</button>
+                <!-- RESULTADO DEL PREMIO -->
+                <div id="result-box"></div>
+
+                <!-- PANTALLA FINAL: GRACIAS POR PARTICIPAR (Quita la ruleta al terminar) -->
+                <div id="thanks-screen" class="thanks-screen">
+                    <div class="thanks-title">GRACIAS POR<br><span style="color:#ff007f;">PARTICIPAR</span></div>
+                    <p style="color: #ccc; font-size: 1.15rem;">Tu oportunidad del día de hoy ha sido registrada.</p>
+                    <div class="thanks-emoji">😉👍</div>
+                </div>
+
+                <!-- INSTRUCCIONES -->
+                <div class="instrucciones">
+                    <h3 style="color: #45f3ff; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> ¿Cómo reclamar?</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.4; color: #eee;">Si ganas minutos gratis, tómale una <strong>captura de pantalla</strong> a tu resultado y muéstrala en nuestro local en La Unión al hacer tu consumo mínimo. ¡Válido por un intento al día!</p>
+                </div>
             </div>
 
-            <!-- RESULTADO DEL PREMIO -->
-            <div id="result-box"></div>
-
-            <!-- PANTALLA FINAL: GRACIAS POR PARTICIPAR -->
-            <div id="thanks-screen" class="thanks-screen">
-                <div class="thanks-title">GRACIAS POR<br><span style="color:#ff007f;">PARTICIPAR</span></div>
-                <p style="color: #ccc; font-size: 1.1rem;">Tu intento de hoy ha sido registrado con éxito.</p>
-                <div class="thanks-emoji">😉👍</div>
+            <!-- 📱 BOTONES DIRECTOS DE ATENCIÓN DE WHATSAPP (A la vista de todos) -->
+            <div class="whatsapp-direct-section">
+                <a href="https://wa.me/50364618068?text=Hola!%20Acabo%20de%20ver%20la%20página%20web%20y%20quiero%20hacer%20una%20consulta%20sobre%20la%20Zona%20Gamer%20o%20el%20Menú." class="wa-btn-direct empresa-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> 📱 WhatsApp Empresa
+                </a>
+                <a href="https://wa.me/50378856202?text=Hola,%20quiero%20contactarme%20directamente%20con%20la%20administración%20de%20la%20empresa." class="wa-btn-direct presidencia-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> 👑 Contacto Presidencia
+                </a>
             </div>
 
-            <div class="instrucciones">
-                <h3 style="color: #45f3ff; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> ¿Cómo reclamar?</h3>
-                <p style="font-size: 0.95rem; line-height: 1.4;">Si ganas minutos gratis, tómale una <strong>captura de pantalla</strong> a tu resultado y muéstrala en nuestro local en La Unión al hacer tu consumo mínimo. ¡Válido por un intento al día!</p>
-            </div>
         </div>
     </section>
 
-    <!-- MENÚ FLOTANTE DE WHATSAPP -->
-    <div class="whatsapp-container">
-        <div id="wa-menu" class="whatsapp-menu">
-            <a href="https://wa.me/50364618068?text=Hola!%20Acabo%20de%20ver%20la%20página%20web%20y%20quiero%20hacer%20una%20consulta%20sobre%20la%20Zona%20Gamer%20o%20el%20Menú." class="whatsapp-link empresa" target="_blank">
-                <i class="fab fa-whatsapp"></i> 📱 WhatsApp Empresa
-            </a>
-            <a href="https://wa.me/50378856202?text=Hola,%20quiero%20contactarme%20directamente%20con%20la%20administración%20de%20la%20empresa." class="whatsapp-link presidencia" target="_blank">
-                <i class="fab fa-whatsapp"></i> 👑 Contacto Presidencia
-            </a>
-        </div>
-        <button class="whatsapp-main-btn" onclick="toggleWAMenu()">
-            <i class="fab fa-whatsapp"></i>
-        </button>
-    </div>
-
-    <!-- LÓGICA CON LUCES Y CONFETI -->
+    <!-- LOGICA DEL JUEGO -->
     <script>
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
@@ -375,10 +347,7 @@
 
         drawWheel();
 
-        function toggleWAMenu() {
-            document.getElementById("wa-menu").classList.toggle("show");
-        }
-
+        // CONTROL ANTI-TRAMPAS
         window.onload = function() {
             const yaJugo = localStorage.getItem("ruleta_jugada_hoy");
             const fechaGuardada = localStorage.getItem("ruleta_fecha_jugada");
@@ -396,7 +365,6 @@
             spinBtn.disabled = true;
             resultBox.innerText = "⏳ Girando la suerte...";
             
-            // Activar luces parpadeantes neón
             gameSection.classList.add("spinning-lights");
             
             const spins = Math.floor(Math.random() * 5) + 5;
@@ -406,7 +374,6 @@
             canvas.style.transform = `rotate(${totalDegrees}deg)`;
 
             setTimeout(() => {
-                // Apagar las luces de fondo al detenerse
                 gameSection.classList.remove("spinning-lights");
 
                 const normalizedDegrees = (360 - (randomDegrees % 360) + 270) % 360;
@@ -420,7 +387,7 @@
                     resultBox.style.color = "#45f3ff";
                     resultBox.innerHTML = `🎉 ¡GANASTE: ${wonPrize}! 🏆`;
                     
-                    // 🎉 DISPARO DE CONFETI GAMER (Cian y Magenta)
+                    // CONFETI PREMIUM
                     confetti({
                         particleCount: 150,
                         spread: 80,
@@ -433,7 +400,7 @@
                 localStorage.setItem("ruleta_jugada_hoy", "true");
                 localStorage.setItem("ruleta_fecha_jugada", hoy);
 
-                // Esperar 4 segundos disfrutando el premio y luego desvanecer
+                // Esperar los 4 segundos para que lean bien qué ganaron y luego esconder
                 setTimeout(() => {
                     rouletteArea.classList.add("hidden");
                     thanksScreen.classList.add("show");
