@@ -6,6 +6,63 @@
     <title>Entretenimiento Digital | Bienvenidos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 📱 ESTILOS PARA LOS BOTONES DIRECTOS DE WHATSAPP (Sincronizados con la ruleta) */
+        .whatsapp-direct-section {
+            margin: 40px auto 20px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            padding: 0 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .wa-btn-direct {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 340px;
+            padding: 14px 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .wa-btn-direct i {
+            font-size: 1.4rem;
+        }
+
+        /* Botón de la Empresa (Verde Tech) */
+        .wa-btn-direct.empresa-btn {
+            background: #25d366;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            border: 1px solid #25d366;
+        }
+
+        .wa-btn-direct.empresa-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px #25d366;
+        }
+
+        /* Botón del Presidente (Magenta Presidencia) */
+        .wa-btn-direct.presidencia-btn {
+            background: #ff007f;
+            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
+            border: 1px solid #ff007f;
+        }
+
+        .wa-btn-direct.presidencia-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px #ff007f;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +89,7 @@
 
     <section id="contacto" class="contacto-section" style="border-top: 2px solid #45f3ff;">
         <h2>¿Listo para la <span>Diversión</span>?</h2>
-        <p class="sub">Conoce nuestros horarios especiales y síguenos en plataformas oficiales.</p>
+        <p class="sub">Conoce nuestros horarios especiales y contáctanos por nuestros canales oficiales.</p>
         
         <div class="contacto-container">
             <div class="contacto-box">
@@ -59,11 +116,17 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <a href="https://wa.me/50378856202?text=Hola!%20Vengo%20de%20la%20página%20web" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+        <!-- 📱 BOTONES DIRECTOS DE ATENCIÓN DE WHATSAPP (Fijos a la vista al final de la sección) -->
+        <div class="whatsapp-direct-section">
+            <a href="https://wa.me/50364618068?text=Hola!%20Acabo%20de%20ver%20la%20página%20web%20y%20quiero%20hacer%20una%20consulta%20sobre%20la%20Zona%20Gamer%20o%20el%20Menú." class="wa-btn-direct empresa-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> 📱 WhatsApp Empresa
+            </a>
+            <a href="https://wa.me/50378856202?text=Hola,%20quiero%20contactarme%20directamente%20con%20la%20administración%20de%20la%20empresa." class="wa-btn-direct presidencia-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> 👑 Contacto Presidencia
+            </a>
+        </div>
+    </section>
 
 </body>
 </html>
