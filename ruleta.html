@@ -6,7 +6,6 @@
     <title>Entretenimiento Digital | Ruleta de la Suerte</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Librería de Confeti Efecto Premium -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         /* 🎮 FONDO CON IMAGEN GAMER REAL DE ALTA CALIDAD */
@@ -16,12 +15,10 @@
             min-height: 100vh;
             position: relative;
             overflow: hidden;
-            /* Imagen gamer profesional de fondo */
             background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920') no-repeat center center fixed;
             background-size: cover;
         }
 
-        /* Capa oscura encima de la imagen para que las letras y la ruleta resalten perfectamente */
         .game-section::before {
             content: '';
             position: absolute;
@@ -30,7 +27,7 @@
             z-index: 0;
         }
 
-        /* 🚨 EFECTO DE LUCES PARPADEANTES AL GIRAR (Afecta la capa oscura) */
+        /* 🚨 EFECTO DE LUCES PARPADEANTES AL GIRAR */
         .game-section.spinning-lights::before {
             animation: neonFlash 0.4s infinite alternate;
         }
@@ -48,7 +45,7 @@
             padding: 0 20px;
         }
 
-        /* TABLERO GAMER SEMI-TRANSPARENTE (Contenedor principal) */
+        /* TABLERO GAMER SEMI-TRANSPARENTE */
         .main-card-setup {
             background: rgba(18, 20, 28, 0.85);
             border: 2px solid #45f3ff;
@@ -58,7 +55,6 @@
             margin-bottom: 40px;
         }
 
-        /* CONTENEDOR DE LA RULETA */
         .roulette-area {
             transition: opacity 0.6s ease, transform 0.6s ease;
             opacity: 1;
@@ -124,7 +120,6 @@
             color: #0b0c10;
         }
 
-        /* PANTALLA FINAL: GRACIAS POR PARTICIPAR */
         .thanks-screen {
             display: none;
             opacity: 0;
@@ -173,59 +168,6 @@
             margin-top: 20px;
         }
 
-        /* 📱 SECCIÓN DE BOTONES DE WHATSAPP DIRECTOS (SIN MENÚS ESCONDIDOS) */
-        .whatsapp-direct-section {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .wa-btn-direct {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            max-width: 340px;
-            padding: 14px 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 10px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .wa-btn-direct i {
-            font-size: 1.4rem;
-        }
-
-        /* Botón de la Empresa (Verde Tech) */
-        .wa-btn-direct.empresa-btn {
-            background: #25d366;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            border: 1px solid #25d366;
-        }
-
-        .wa-btn-direct.empresa-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px #25d366;
-        }
-
-        /* Botón del Presidente (Magenta Presidencia) */
-        .wa-btn-direct.presidencia-btn {
-            background: #ff007f;
-            box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
-            border: 1px solid #ff007f;
-        }
-
-        .wa-btn-direct.presidencia-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px #ff007f;
-        }
-
         @keyframes pulse {
             0% { transform: scale(1); }
             100% { transform: scale(1.08); }
@@ -234,7 +176,6 @@
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN -->
     <header>
         <div class="logo">Entretenimiento <span>Digital</span></div>
         <nav>
@@ -242,17 +183,14 @@
             <a href="juegos.html">Juegos y Premios</a>
             <a href="menu.html">Menú y Precios</a>
             <a href="ruleta.html" class="active">¡Ruleta Digital!</a>
+            <a href="contacto.html">Contacto</a>
         </nav>
     </header>
 
-    <!-- ZONA DEL JUEGO -->
     <section id="game-section" class="game-section">
         <div class="game-content-container">
             
-            <!-- TARJETA PRINCIPAL REFORZADA -->
             <div class="main-card-setup">
-                
-                <!-- ÁREA ACTIVA DE LA RULETA -->
                 <div id="roulette-area" class="roulette-area">
                     <h2>La Ruleta <span>Digital</span></h2>
                     <p class="sub">¡Prueba tu suerte gratis desde la web antes de visitarnos!</p>
@@ -265,37 +203,23 @@
                     <button id="spin-button" class="spin-btn" onclick="spinWheel()">¡GIRAR RULETA! 🎮</button>
                 </div>
 
-                <!-- RESULTADO DEL PREMIO -->
                 <div id="result-box"></div>
 
-                <!-- PANTALLA FINAL: GRACIAS POR PARTICIPAR (Quita la ruleta al terminar) -->
                 <div id="thanks-screen" class="thanks-screen">
                     <div class="thanks-title">GRACIAS POR<br><span style="color:#ff007f;">PARTICIPAR</span></div>
                     <p style="color: #ccc; font-size: 1.15rem;">Tu oportunidad del día de hoy ha sido registrada.</p>
                     <div class="thanks-emoji">😉👍</div>
                 </div>
 
-                <!-- INSTRUCCIONES -->
                 <div class="instrucciones">
                     <h3 style="color: #45f3ff; margin-bottom: 10px;"><i class="fas fa-info-circle"></i> ¿Cómo reclamar?</h3>
                     <p style="font-size: 0.95rem; line-height: 1.4; color: #eee;">Si ganas minutos gratis, tómale una <strong>captura de pantalla</strong> a tu resultado y muéstrala en nuestro local en La Unión al hacer tu consumo mínimo. ¡Válido por un intento al día!</p>
                 </div>
             </div>
 
-            <!-- 📱 BOTONES DIRECTOS DE ATENCIÓN DE WHATSAPP (A la vista de todos) -->
-            <div class="whatsapp-direct-section">
-                <a href="https://wa.me/50364618068?text=Hola!%20Acabo%20de%20ver%20la%20página%20web%20y%20quiero%20hacer%20una%20consulta%20sobre%20la%20Zona%20Gamer%20o%20el%20Menú." class="wa-btn-direct empresa-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> 📱 WhatsApp Empresa
-                </a>
-                <a href="https://wa.me/50378856202?text=Hola,%20quiero%20contactarme%20directamente%20con%20la%20administración%20de%20la%20empresa." class="wa-btn-direct presidencia-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> 👑 Contacto Presidencia
-                </a>
-            </div>
-
         </div>
     </section>
 
-    <!-- LOGICA DEL JUEGO -->
     <script>
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
@@ -347,7 +271,6 @@
 
         drawWheel();
 
-        // CONTROL ANTI-TRAMPAS
         window.onload = function() {
             const yaJugo = localStorage.getItem("ruleta_jugada_hoy");
             const fechaGuardada = localStorage.getItem("ruleta_fecha_jugada");
@@ -387,7 +310,6 @@
                     resultBox.style.color = "#45f3ff";
                     resultBox.innerHTML = `🎉 ¡GANASTE: ${wonPrize}! 🏆`;
                     
-                    // CONFETI PREMIUM
                     confetti({
                         particleCount: 150,
                         spread: 80,
@@ -400,7 +322,6 @@
                 localStorage.setItem("ruleta_jugada_hoy", "true");
                 localStorage.setItem("ruleta_fecha_jugada", hoy);
 
-                // Esperar los 4 segundos para que lean bien qué ganaron y luego esconder
                 setTimeout(() => {
                     rouletteArea.classList.add("hidden");
                     thanksScreen.classList.add("show");
