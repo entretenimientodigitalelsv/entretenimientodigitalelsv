@@ -253,19 +253,20 @@ nav a:hover {
     position: relative;
     z-index: 2;
 }
-/* FORZAR LOS FONDOS EN LAS PÁGINAS SELECCIONADAS */
-body:has(#juegos), #juegos, .juegos-seccion {
-    background-image: url('fondo-juegos.png') !important;
+/* FONDOS CORREGIDOS CON LOS NOMBRES EXACTOS DE TU HTML */
+body {
+    background-image: url('fondo-menu.png') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
 }
 
-body:has(#menu), #menu, .menu-seccion, #precios-comida {
+/* Si estás en la sección de la página de menú */
+.menu-section {
     background-image: url('fondo-menu.png') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+}
 }
