@@ -221,3 +221,11 @@ nav a:hover {
 .redes-links a:hover {
     color: #00ffff;
 }
+/* FONDO DE NEÓN PARA LA SECCIÓN DE JUEGOS Y PREMIOS */
+.juegos-seccion, #juegos, #premios {
+    background-image: url('fondo-juegos.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Esto hace que el fondo se quede quieto y se vea genial al hacer scroll */
+}
