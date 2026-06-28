@@ -362,50 +362,39 @@
     </script>
 </body>
 </html>
+<!-- SISTEMA DE AUDIO EXCLUSIVO PARA LA RULETA Y PREMIOS -->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    // 1. Definimos la ruta del audio dentro de tu carpeta
-    const audioUrl = 'audio/Tu_Mundo_De_Diversión.mp3';
-    const bgAudio = new Audio(audioUrl);
-    bgAudio.loop = true; // Para que se repita si se acaba
-    bgAudio.volume = 0.15; // Volumen bajito al 15% para que no sature
+    // 1. Configuramos la música de fondo de la ruleta y el audio de victoria
+    const bgAudio = new Audio('audio/Plomo_y_Velocidad.mp3');
+    const winAudio = new Audio('audio/Golden_Latitude.mp3');
+    
+    bgAudio.loop = true;
+    bgAudio.volume = 0.15; // Volumen de fondo suave
+    winAudio.volume = 0.30; // El premio suena un poquito más fuerte
 
-    // 2. Revisamos si la música ya venía sonando en la página anterior
-    const savedTime = localStorage.getItem('bgAudioTime');
-    const isPlaying = localStorage.getItem('bgAudioPlaying');
+    // Avisamos al sistema global que cambiamos de canción para que no se duplique
+    localStorage.setItem('bgAudioPlaying', 'false');
 
-    if (savedTime) {
-      bgAudio.currentTime = parseFloat(savedTime);
-    }
-
-    // 3. Función para dar Play
-    const playAudio = () => {
-      bgAudio.play().then(() => {
-        localStorage.setItem('bgAudioPlaying', 'true');
-      }).catch(err => console.log("Esperando interacción del usuario..."));
-    };
-
-    // Si ya venía sonando antes, intentamos reproducir de una sola vez
-    if (isPlaying === 'true') {
-      playAudio();
-    }
-
-    // 4. EL TRUCO: Al primer clic que dé el usuario en CUALQUIER parte, se activa el audio
+    // Al primer clic en la pantalla de la ruleta, arranca la música de tensión
     window.addEventListener('click', () => {
-      if (bgAudio.paused) {
-        playAudio();
+      if (bgAudio.paused && winAudio.paused) {
+        bgAudio.play().catch(err => console.log("Esperando clic..."));
       }
     }, { once: true });
 
-    // 5. Guardar el segundo exacto antes de que cambie de página o cierre
-    setInterval(() => {
-      if (!bgAudio.paused) {
-        localStorage.setItem('bgAudioTime', bgAudio.currentTime);
+    // 2. DETECTAR CUANDO GANAN EN LA RULETA
+    // Este truco revisa cuando el código de tu ruleta muestra el premio
+    const originalSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+      // Cuando tu código guarda que ya se jugó hoy, significa que la ruleta se detuvo
+      if (key === 'ruleta_jugada_hoy' && value === 'true') {
+        bgAudio.pause(); // Pausamos la música de tensión
+        setTimeout(() => {
+          winAudio.play(); // ¡Suena el audio de ganador junto al confeti!
+        }, 500);
       }
-    }, 500);
-
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('bgAudioTime', bgAudio.currentTime);
-    });
+      originalSetItem.apply(this, arguments);
+    };
   });
 </script>
