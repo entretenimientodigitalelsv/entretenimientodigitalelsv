@@ -229,3 +229,27 @@ nav a:hover {
     background-repeat: no-repeat;
     background-attachment: fixed; /* Esto hace que el fondo se quede quieto y se vea genial al hacer scroll */
 }
+/* FONDO DE NEÓN GAMER Y COMIDA PARA LA SECCIÓN DE MENÚ Y PRECIOS */
+.menu-seccion, #menu, #precios-comida {
+    background-image: url('fondo-menu.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Mantiene el fondo fijo para un efecto visual premium al hacer scroll */
+    position: relative;
+}
+
+/* CAPA OSCURA OPCIONAL: Esto ayuda a que el texto blanco de tus precios se lea clarito sobre la imagen */
+.menu-seccion::before, #menu::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Oscurece un 60% el fondo para dar contraste */
+    z-index: 1;
+}
+
+/* Asegura que tus tablas, textos y precios queden por encima de la capa oscura */
+.menu-seccion *, #menu * {
+    position: relative;
+    z-index: 2;
+}
