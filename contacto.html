@@ -127,6 +127,52 @@
 
         </div>
     </section>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // 1. Definimos la ruta del audio dentro de tu carpeta
+    const audioUrl = 'audio/Tu_Mundo_De_Diversión.mp3';
+    const bgAudio = new Audio(audioUrl);
+    bgAudio.loop = true; // Para que se repita si se acaba
+    bgAudio.volume = 0.15; // Volumen bajito al 15% para que no sature
 
+    // 2. Revisamos si la música ya venía sonando en la página anterior
+    const savedTime = localStorage.getItem('bgAudioTime');
+    const isPlaying = localStorage.getItem('bgAudioPlaying');
+
+    if (savedTime) {
+      bgAudio.currentTime = parseFloat(savedTime);
+    }
+
+    // 3. Función para dar Play
+    const playAudio = () => {
+      bgAudio.play().then(() => {
+        localStorage.setItem('bgAudioPlaying', 'true');
+      }).catch(err => console.log("Esperando interacción del usuario..."));
+    };
+
+    // Si ya venía sonando antes, intentamos reproducir de una sola vez
+    if (isPlaying === 'true') {
+      playAudio();
+    }
+
+    // 4. EL TRUCO: Al primer clic que dé el usuario en CUALQUIER parte, se activa el audio
+    window.addEventListener('click', () => {
+      if (bgAudio.paused) {
+        playAudio();
+      }
+    }, { once: true });
+
+    // 5. Guardar el segundo exacto antes de que cambie de página o cierre
+    setInterval(() => {
+      if (!bgAudio.paused) {
+        localStorage.setItem('bgAudioTime', bgAudio.currentTime);
+      }
+    }, 500);
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('bgAudioTime', bgAudio.currentTime);
+    });
+  });
+</script>
 </body>
 </html>
