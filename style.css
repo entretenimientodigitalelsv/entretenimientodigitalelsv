@@ -269,4 +269,18 @@ body {
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
+/* CENTRAR LA LISTA DE MENÚ Y PRECIOS */
+.menu-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    max-width: 600px !important; /* Limita el ancho para que no se estire feo */
+}
+
+.menu-item {
+    width: 100% !important;
+    margin-bottom: 20px !important;
 }
