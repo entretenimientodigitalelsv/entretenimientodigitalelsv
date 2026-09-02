@@ -284,3 +284,84 @@ body {
     width: 100% !important;
     margin-bottom: 20px !important;
 }
+/* --- ESTILOS TÍO NOTICIERO --- */
+.contenedor-noticiero {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.tarjeta-candado {
+    background: #121212;
+    border: 2px solid #00f3ff;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+    color: #fff;
+}
+
+.icono-candado {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.grupo-input {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.grupo-input input[type="password"] {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #00f3ff;
+    background: #222;
+    color: #fff;
+    outline: none;
+    width: 250px;
+}
+
+.grupo-input button {
+    padding: 12px 20px;
+    background: #00f3ff;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.grupo-input button:hover {
+    background: #ff007f;
+    color: #fff;
+    box-shadow: 0 0 10px #ff007f;
+}
+
+.error-texto {
+    color: #ff3333;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.oculto {
+    display: none;
+}
+
+.seccion-video h2 {
+    color: #00f3ff;
+    margin-bottom: 15px;
+}
+
+.marco-video {
+    border: 3px solid #ff007f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+}
+
+.boton-volver {
+    margin-top: 30px;
+}
