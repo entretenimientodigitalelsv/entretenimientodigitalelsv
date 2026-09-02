@@ -365,3 +365,45 @@ body {
 .boton-volver {
     margin-top: 30px;
 }
+/* --- ESTILOS RADIO DIGITAL --- */
+.contenedor-radio {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.tarjeta-radio {
+    background: #121212;
+    border: 2px solid #ff007f;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+    border-radius: 16px;
+    padding: 30px;
+    color: #fff;
+}
+
+.marco-logo-radio {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #00f3ff;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+}
+
+.logo-radio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reproductor-box {
+    margin-top: 25px;
+}
+
+.reproductor-box audio {
+    width: 100%;
+    border-radius: 30px;
+    outline: none;
+}
