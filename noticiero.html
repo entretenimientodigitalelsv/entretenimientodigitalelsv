@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tío Noticiero - Entretenimiento Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Tío Noticiero</h1>
+        <p>Entretenimiento Digital</p>
+    </header>
+
+    <main class="contenedor-noticiero">
+        
+        <!-- PANTALLA DE SEGURIDAD (CANDADO) -->
+        <div id="bloqueo-seguridad" class="tarjeta-candado">
+            <div class="icono-candado">🔒</div>
+            <h2>Contenido Protegido</h2>
+            <p>Ingresá la contraseña para ver la presentación del Tío Noticiero:</p>
+            
+            <div class="grupo-input">
+                <input type="password" id="clave-input" placeholder="Escribí la contraseña aquí...">
+                <button onclick="validarClave()">Ingresar</button>
+            </div>
+            
+            <p id="mensaje-error" class="error-texto"></p>
+        </div>
+
+        <!-- SECCIÓN DEL VIDEO (OCULTA POR DEFECTO) -->
+        <div id="contenido-video" class="seccion-video oculto">
+            <h2>🎥 Presentación Oficial - Tío Noticiero</h2>
+            <div class="marco-video">
+                <video controls width="100%">
+                    <source src="video.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
+            </div>
+        </div>
+
+        <!-- BOTÓN PARA REGRESAR -->
+        <div class="boton-volver">
+            <a href="index.html" class="btn">← Volver al Inicio</a>
+        </div>
+
+    </main>
+
+    <!-- LÓGICA DE VALIDACIÓN -->
+    <script>
+        function validarClave() {
+            const claveIngresada = document.getElementById('clave-input').value;
+            const claveCorrecta = "20082709Evelin";
+            const pantallaBloqueo = document.getElementById('bloqueo-seguridad');
+            const contenidoVideo = document.getElementById('contenido-video');
+            const mensajeError = document.getElementById('mensaje-error');
+
+            if (claveIngresada === claveCorrecta) {
+                pantallaBloqueo.style.display = "none";
+                contenidoVideo.classList.remove('oculto');
+            } else {
+                mensajeError.textContent = "❌ Contraseña incorrecta. Intentá de nuevo.";
+            }
+        }
+    </script>
+
+</body>
+</html>
